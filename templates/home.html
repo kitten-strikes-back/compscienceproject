@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Library Homepage</title>
+    <style>	
+    	marquee{
+        background-color: red;
+        font-family: times new roman;
+        font-size: 35px
+        }
+
+        body {
+            background-color: rgb(30, 255, 0);
+            font-family:sans-serif;
+        }
+
+        h2 {
+            color: tomato;
+            text-shadow: 0 2.5px 2px blue;
+            text-align: center;
+        }
+
+        label {
+            color: tomato;
+            text-shadow: 0 0 10px red;
+            font-size: 19px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            font-family: papyrus;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            width: 250px;
+            border-right-style: solid;
+            border-left-style: solid;
+        }
+
+        input:focus {
+            border-color: royalblue;
+            box-shadow: 12px 12px 5px rgba(65, 105, 225, 0.5);
+        }
+
+        button {
+            background-color: black;
+            color: skyblue;
+            padding: 12px 24px;
+            border: 3px solid;
+            animation: glow 4s infinite;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            cursor: pointer;
+            color: red;
+            transform: scale(1.1);
+        }
+
+        p {
+            color: tomato;
+            text-align: center;
+        }
+
+        /* Add keyframe animation for button glowing effect */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px black;
+            }
+            25% {
+                box-shadow: 0 0 20px blue;
+            }
+            50% {
+                box-shadow: 0 0 40px red;
+            }
+            75% {
+                box-shadow: 0 0 20px blue;
+            }
+            
+            100% {
+                box-shadow: 0 0 10px black;
+            }
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 260px;
+        }
+    </style>
+<script>
+function recieveNumber() {
+    let role = "{{ role }}";  // Make sure role is passed correctly from Flask
+    let number = parseInt(document.getElementById("number").value);
+
+    let dabooks;
+    if (role == 'student') {
+        dabooks = 2;
+    } else if (role == 'teacher') { 
+        dabooks = 5;
+    } else {
+        dabooks = 20;
+    }
+
+    if (number > dabooks) {
+        document.getElementById("messageBox").textContent = "No more than " + dabooks + " copies are allowed for your role.";
+    } else {
+        document.getElementById("messageBox").textContent = "Click 'Borrow' to receive the books from the library tomorrow!";
+    }
+}
+
+function recieveBooks() {
+    // Get the selected book(s)
+    let bookElement = document.getElementById("book");
+    let books = Array.from(bookElement.selectedOptions).map(option => option.value);
+
+    // Update message box with the selected books
+    if (books.length > 0) {
+        document.getElementById("messageBox").textContent = "Your books: " + books.join(", ");
+    } else {
+        document.getElementById("messageBox").textContent = "No books selected.";
+    }
+}
+</script>
+
+</head>
+<body>
+
+<marquee loop="3">
+This (fake) library interface uses <a href="https://www.oclc.org/en/worldcat/library100/top500.html">OCLC library 500</a> for its library list database.
+</marquee>
+
+<h1>Welcome to the online library interface, {{ username }}!</h1>
+
+<form action="{{ url_for('home') }}" method="post">
+    <label for="number">Book: </label>
+    <input type="text" id="number" name="number" placeholder="No. of copies...">
+    <br><br>
+    <select id="book" name="book">
+        {% for book in allbooks %}
+            <option value="{{ book }}">{{ book }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <button type="button" onclick="recieveNumber()">Check Copies</button><br><br><br>
+    <div style="text-align: center;">
+    <button  class="centerbutton" type="button" onclick="recieveBooks()">Get Books</button><br><br><br><br>
+    </div>
+    <div style="text-align: right;">
+    <button type="submit">Borrow</button>
+    </div>
+</form>
+
+<p id="messageBox" align="center">.</p> 
+
+</body>
+</html>

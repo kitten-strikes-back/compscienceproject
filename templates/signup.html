@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: rgb(30, 255, 0);
+            font-family:sans-serif;
+        }
+
+        h2 {
+            color: tomato;
+            text-shadow: 0 2.5px 2px blue;
+            text-align: center;
+        }
+
+        label {
+            color: tomato;
+            text-shadow: 0 0 7px red;
+            font-size: 19px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            font-family: papyrus;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            width: 250px;
+            border-right-style: solid;
+            border-left-style: solid;
+        }
+
+        input:focus {
+            border-color: royalblue;
+            box-shadow: 12px 12px 5px rgba(65, 105, 225, 0.5);
+        }
+
+        button {
+            background-color: black;
+            color: skyblue;
+            padding: 12px 24px;
+            border: 3px solid;
+            animation: glow 10s infinite;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            cursor: pointer;
+            color: red;
+            transform: scale(1.01);
+        }
+
+        p {
+            color: tomato;
+            text-align: center;
+        }
+
+        /* Add keyframe animation for button glowing effect */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 15px black;
+            }
+            25% {
+                box-shadow: 0 0 30px blue;
+            }
+            50% {
+                box-shadow: 0 0 50px red;
+            }
+            75% {
+                box-shadow: 0 0 30px blue;
+            }
+            
+            100% {
+                box-shadow: 0 0 15px black;
+            }
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 260px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>SIGN UP</h2>
+        <form method="POST" action="{{ url_for('signup') }}">
+            <label for="username">Username: </label>
+            <input type="text" name="username" required placeholder="Enter username here!"><br><br>
+
+            <label for="password">Password: </label>
+            <input type="password" name="password" required placeholder="Enter password here!"><br><br>
+
+            <label for="role">Role: </label>
+
+            <select name="role">
+                <option value="student">STUDENT</option>
+                <option value="teacher">TEACHER</option>
+                <option value="stores">STORES OFFICE</option>
+            </select><br><br>
+
+            <button type="submit">Sign up!</button>
+        </form>
+    </div>
+</body>
+</html>
