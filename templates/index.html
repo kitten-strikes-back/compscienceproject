@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head> 
+  <title>LIBRARY INTERFACE</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/3-old-books-in-a-library-luoman.jpg") no-repeat center center fixed;
+      background-size: cover;
+    }
 
+    .rectangle {
+      background-color: blue;
+      border: 2px solid black;
+      position: absolute;
+      left: 0px;
+    }
+
+    #rectangle {
+      top: 0;
+    }
+
+    #rectangle1 {
+      bottom: 0;
+    }
+
+    h1 {
+      color: white;
+      position: absolute;
+      top: 7%;
+      left: 50%; 
+      transform: translate(-50%, -50%); 
+      font-size: 3em;
+      text-align: center;
+    }
+
+    @keyframes Retract {
+      from { top: 0px; }
+      to { top: -500px; }
+    }
+
+    @keyframes Retract1 {
+      from { bottom: 0px; }
+      to { bottom: -500px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="rectangle" id="rectangle"></div>
+  <div class="rectangle" id="rectangle1"></div>
+  <h1 id="head">TISB LIBRARY</h1>
+
+  <script>
+
+    window.onload = function() {
+      const rect = document.getElementById("rectangle");
+      const rect1 = document.getElementById("rectangle1");
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      // Set dimensions
+      rect.style.width = rect1.style.width = windowWidth + "px";
+      rect.style.height = rect1.style.height = windowHeight / 3 + "px";
+
+      // Animation on mousemove
+      document.addEventListener("click", function(e) {
+        rect.style.animation = "Retract 5s forwards";
+        rect1.style.animation = "Retract1 5s forwards";
+        
+     	window.location.href = "/login";
+
+      });
+    }
+  </script>
+</body>
+</html>
+					
